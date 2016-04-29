@@ -5,7 +5,6 @@ use warnings;
 use Dancer ':syntax';
 
 use Try::Tiny;
-use JSON;
 
 require wsTemplate::ErrorHandler;
 
@@ -32,7 +31,7 @@ post '/ws/:templateType/' => sub {
 	} catch {
 		my $exception = $_;
 		$userReadableResponse = wsTemplate::ErrorHandler->getUserReadableResponseForException($exception);
-	}
+	};
 
 	unless ($helperClass) {
 		my $templateUnicorn = request->upload('template');
@@ -40,7 +39,7 @@ post '/ws/:templateType/' => sub {
 
 		try {
 			my $templatePandicorn = $helperClass->mergeUnicornWithPanda($templateUnicorn, $parametersPanda);
-			$userRedableResponse = $templatePandicorn || wsTemplate::ErrorHandler->getUserReadableResponseForException(new Exception::HelperProducedNoOutput);
+			$userReadableResponse = $templatePandicorn || wsTemplate::ErrorHandler->getUserReadableResponseForException(new Exception::HelperProducedNoOutput);
 		} catch {
 			my $exception = $_;
 			$userReadableResponse = wsTemplate::ErrorHandler->getUserReadableResponseForException($exception);
