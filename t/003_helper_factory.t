@@ -1,9 +1,9 @@
-use Test::More tests => 5;
+use Test::More tests => 7;
 use strict;
 use warnings;
 use Test::Exception;
 
-@knownHelpers = qw/TT TPL/;
+my @knownHelpers = qw/TT TPL/;
 
 use_ok('wsTemplate::HelperFactory');
 use wsTemplate::HelperFactory;
