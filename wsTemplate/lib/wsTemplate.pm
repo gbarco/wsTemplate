@@ -35,7 +35,7 @@ post '/ws/:templateType' => sub {
 
 	if ($helperClass) {
 		my $templateUnicorn = request->upload('template');
-		my $parametersPanda = request->upload('vars');
+		my $parametersPanda = request->upload('parameters');
 
 		try {
 			my $templatePandicorn = $helperClass->mergeTemplateUnicornWithParametersPanda($templateUnicorn, $parametersPanda);
