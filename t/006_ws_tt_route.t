@@ -16,7 +16,7 @@ my @happyPathTests = (
 );
 
 foreach my $happyPathTest (@happyPathTests) {
-	my $happyPathResponse = dancer_response('POST' => '/ws/tt',{ files => [{filename => $testFilePath . $happyPathTest->{template}, name => 'template'},{filename => $testFilePath . $happyPathTest->{parameters}, name => 'parameter'}] });
+	my $happyPathResponse = dancer_response('POST' => '/ws/tt',{ files => [{filename => $testFilePath . $happyPathTest->{template}, name => 'template'},{filename => $testFilePath . $happyPathTest->{parameters}, name => 'parameters'}] });
 	file_contents_eq_or_diff($testFilePath . $happyPathTest->{results}, $happyPathResponse->{content}, $happyPathTest->{message});
 }
 
