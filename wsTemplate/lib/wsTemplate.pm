@@ -27,18 +27,18 @@ post '/ws/:templateType' => sub {
 	my $userReadableResponse;	
 
 	try {
-		$helperClass = wsTemplate::HelperFactory->instance(params->{templateType});
+		$helperClass = wsTemplate::HelperFactory->instance({helperClassName=>params->{templateType}});
 	} catch {
 		my $exception = $_;
 		$userReadableResponse = wsTemplate::ErrorHandler->getUserReadableResponseForException($exception);
 	};
 
-	unless ($helperClass) {
+	if ($helperClass) {
 		my $templateUnicorn = request->upload('template');
 		my $parametersPanda = request->upload('vars');
 
 		try {
-			my $templatePandicorn = $helperClass->mergeUnicornWithPanda($templateUnicorn, $parametersPanda);
+			my $templatePandicorn = $helperClass->mergeTemplateUnicornWithParametersPanda($templateUnicorn, $parametersPanda);
 			$userReadableResponse = $templatePandicorn || wsTemplate::ErrorHandler->getUserReadableResponseForException(new Exception::HelperProducedNoOutput);
 		} catch {
 			my $exception = $_;
