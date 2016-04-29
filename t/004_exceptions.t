@@ -7,6 +7,6 @@ use_ok('wsTemplate::Exception');
 
 can_ok('wsTemplate::Exception::Error', 'throw');
 can_ok('wsTemplate::Exception::FailedToInstanceHelperClass', 'throw');
-can_ok('wsTemplate::Exception::MuggleClass','throw');
+can_ok('wsTemplate::Exception::MuggleHelper','throw');
 
 1;
