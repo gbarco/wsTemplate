@@ -1,1 +1,1 @@
-prove -Ilib t/
+prove -Ilib ../t/
