@@ -2,6 +2,7 @@ package wsTemplate::HelperFactory;
 
 use Moose;
 use Try::Tiny;
+use wsTemplate::Exception;
 
 has 'helperClassName' => (
 	is  => 'ro',
@@ -19,11 +20,20 @@ sub instance {
 	my $helperClass;
 
 	if ($helperClassName) {
-		require $helperClassName;
-		$helperClass = wsTemplate::HelperFactory->instance(params->{templateType});
+		try {
+			require $helperClassName;
+			bless $helperClass, $helperClassName;
+		} catch {
+			my $errorMessage = $_;
+			wsTemplate::Exception::FailedToInstanceHelperClass->throw(error=>$errorMessage);
+		}
 	}
 
-	return $helperClass;
+	unless(ref $helperClass && $helperClass->can('instance')) {
+		wsTemplate::Exception::MuggleHelper->throw(error=>"Class has no magic when trying to instance $helperClassName");
+	}
+
+	return $helperClass->instance;
 }
 
 
