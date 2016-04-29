@@ -2,7 +2,7 @@ use Test::More tests => 1;
 use strict;
 use warnings;
 
-use wsSpeadsheet;
+use wsTemplate;
 
 # the order is important
 use Dancer::Test;
