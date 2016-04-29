@@ -20,7 +20,7 @@ get '/version' => sub {
 	return to_json { version => $VERSION };
 };
 
-post '/ws/:templateType/' => sub {
+post '/ws/:templateType' => sub {
 	require wsTemplate::HelperFactory;
 
 	my $helperClass;
