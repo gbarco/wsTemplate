@@ -22,17 +22,7 @@ get '/version' => sub {
 };
 
 post '/ws/:templateType/' => sub {
-
-	my $helperInstantializationFailed = 0;
-	my $userContent = 0;
-	my $helperClassName;
-
-	params->{templateType} =~ /^((tpl)|(tt))$/;
-	$helperClassName = 'wsTemplate::' . $1;
-
-	use wsTemplate::HelperFactory;
-
-	wsTemplate::HelperFactory->canInstance();	
+	require wsTemplate::HelperFactory;
 
 	my $helperClass;
 	my $userReadableResponse;	
