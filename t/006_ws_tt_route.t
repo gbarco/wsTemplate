@@ -10,12 +10,12 @@ use Test::File::Contents;
 
 my $testFilePath = 't/test_files/';
 
-@happyPathTests = [
+my @happyPathTests = [
 	{template=>'warning.tt',parameters=>'warning.simpleERROR.json',results=>'warning.simpleERROR.processed'},
 
 ];
 
-foreach $happyPathTest (@happyPathTests) {
+foreach my $happyPathTest (@happyPathTests) {
 	my $happyPathResponse = dancer_response('POST' => '/ws/tt',{ files => [{filename => $testFilePath . $happyPathTest->{template}, name => 'template'},{filename => $testFilePath . $happyPathTest->{parameters}, name => 'parameter'}] });
 	file_contents_eq($testFilePath . $happyPathTest->{results}, $happyPathResponse->{content}, $happyPathTest->{message});
 }
