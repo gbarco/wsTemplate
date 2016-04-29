@@ -10,3 +10,4 @@ requires 'JSON::XS'; #Faster JSON
 requires 'Try::Tiny';
 requires 'Exception::Base';
 requires 'Template';
+requires 'Test::File::Contents';
