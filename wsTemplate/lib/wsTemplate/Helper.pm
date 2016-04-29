@@ -12,8 +12,6 @@ has 'parameters' => (
 	isa => 'Str',
 );
 
-requires 'instance';
 requires 'mergeTemplateUnicornWithParametersPanda';
 
-no Moose;
-__PACKAGE__->meta->make_immutable;
+1;

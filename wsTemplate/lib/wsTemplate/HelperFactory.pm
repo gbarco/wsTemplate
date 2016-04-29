@@ -10,18 +10,18 @@ has 'helperClassName' => (
 );
 
 sub instance {
-	my $self = shift;
+	my ($self, $params) = @_;
 	my $helperInstantializationFailed = 0;
 
-	my $helperClassName = $self->helperClassName;
+	my $helperClassName = $params->{helperClassName};
 	$helperClassName =~ /((tt)|(tpl))/i;
 	$helperClassName = 'wsTemplate::Helper::' . uc($1);
 
-	my $helperClass;
+	my $helperClass = {};
 
 	if ($helperClassName) {
 		try {
-			require $helperClassName;
+			eval "require $helperClassName";
 			bless $helperClass, $helperClassName;
 		} catch {
 			my $errorMessage = $_;
@@ -29,11 +29,11 @@ sub instance {
 		}
 	}
 
-	unless(ref $helperClass && $helperClass->can('instance')) {
+	unless(ref $helperClass && $helperClass->can('mergeTemplateUnicornWithParametersPanda')) {
 		wsTemplate::Exception::MuggleHelper->throw(error=>"Class has no magic when trying to instance $helperClassName");
 	}
 
-	return $helperClass->instance;
+	return $helperClass;
 }
 
 
