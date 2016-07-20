@@ -1,2 +1,7 @@
-# wsTemplate
-Takes in a TPL or TT file and a JSON representing the parameters that the template should receive and responds with a processed template.
+# wsSingleCode
+A scalable dual funcion mock/production scalable WebService with no SQL backend that centralizes code range, marketing and operating airline queries.
+
+# TODO
+Better livelyness with running response code averages and backend information
+setFlightData should get an Excel file and set backend to hold all needed information
+getFlightData should return an Excel file with all flight information
