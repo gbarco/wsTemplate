@@ -33,7 +33,7 @@ post '/ws/setFlightData/:flightDate' => sub {
 	try {
 		$serviceReadableRespose = $flightData->setFlightData(request->upload('flightData'),$flightDate);
 	} catch {
-		$serviceReadableResponse = wsSingleCode::ErrorHandler->getResponseFromException($_);
+		$serviceReadableResponse = wsSingleCode::ErrorHandler::getResponseFromException($_);
 	}
 
 	return $serviceReadableResponse;
@@ -49,13 +49,13 @@ get '/ws/getFlightData/:flightDate' => sub {
 	try {
 		$serviceReadableRespose = $flightData->getFlightData($flightDate);
 	} catch {
-		$serviceReadableResponse = wsSingleCode::ErrorHandler->getResponseFromException($_);
+		$serviceReadableResponse = wsSingleCode::ErrorHandler::getResponseFromException($_);
 	}
 
 	return $serviceReadableResponse;
 }
 
-get '/ws/getHoldingFlightInformation/:flightDesignator/:flightDate' => sub {
+get '/ws/getFlightRangeInformation/:flightDesignator/:flightDate' => sub {
 	require SingleCode::FlightInformation;
 
 	my $serviceReadableResponse;
@@ -64,9 +64,9 @@ get '/ws/getHoldingFlightInformation/:flightDesignator/:flightDate' => sub {
 	my $flightDate = params->{flightDate};
 
 	try {
-		$flightInfo->getFlightInformation($flightDesignator, $flightDate);
+		$serviceReadableResponse = $flightInfo->getFlightInformationMemoized($flightDesignator, $flightDate);
 	} catch {
-		$serviceReadableResponse = wsSingleCode::ErrorHandler->getResponseFromException($_);
+		$serviceReadableResponse = wsSingleCode::ErrorHandler::getResponseFromException($_);
 	}
 
 	return $serviceReadableResponse;
