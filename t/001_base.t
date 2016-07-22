@@ -3,4 +3,4 @@ use strict;
 use warnings;
 use lib '../lib';
 
-use_ok 'wsTemplate';
+use_ok 'wsSingleCode';
