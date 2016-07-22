@@ -89,7 +89,7 @@ sub _normalizeFlightDesignator {
 		$flightAirlineCode = $1 if $1;
 		$flightNumber = $2;
 	} else {
-		SingleCode::Exception::FlightDesignatorFormat->throw('The format of the flight designator could not be parsed correctly from <$flightDesginator> to Two letters: <$1> and 1 to 4 numbers <$2>.');
+		SingleCode::Exception::FlightDesignatorInvalid->throw('The format of the flight designator could not be parsed correctly from <$flightDesginator> to Two letters: <$1> and 1 to 4 numbers <$2>.');
 	}
 
 	return $flightAirlineCode . scalar $flightNumber;
