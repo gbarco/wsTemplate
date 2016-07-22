@@ -2,8 +2,12 @@
 # env-related settings should go to environments/$env.yml.
 # All the settings in this file will be loaded at Dancer's startup.
 
+# Mutable serializer
+# https://metacpan.org/pod/Dancer::Serializer::Mutable
+serializer: "Mutable"
+
 # Your application's name
-appname: "wsSpeadsheet"
+appname: "wsSingleCode"
 
 # The default layout to use for your application (located in
 # views/layouts/main.tt)
